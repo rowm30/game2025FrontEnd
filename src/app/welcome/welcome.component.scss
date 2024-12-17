@@ -1,0 +1,65 @@
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .progress-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 300px;
+    height: 100px;
+    background-color: #ff6f61;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    span {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      position: relative;
+      width: 80%;
+      height: 10px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      overflow: hidden;
+
+      .progress {
+        height: 100%;
+        background-color: #4caf50;
+        transition: width 0.3s ease;
+      }
+    }
+
+    .progress-text {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}
