@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DecimalPipe, NgForOf } from '@angular/common';
 // @ts-ignore
-import { Topic } from '../../models/topic'; // Ensure this matches the correct file
+import { Topic } from '../../models/topic';
+import {environment} from "../../enviroment"; // Ensure this matches the correct file
 
 @Component({
   selector: 'app-spring-boot',
@@ -29,7 +30,7 @@ export class SpringBootComponent implements OnInit {
 
   loadTopics(): void {
     const userId = localStorage.getItem('selectedUserId') || '7';
-    const apiUrl = `http://localhost:8080/api/quests/user/${userId}`;
+    const apiUrl = `${environment.apiBaseUrl}/api/quests/user/${userId}`;
 
     this.http.get<any>(apiUrl, {
       params: { questType: 'Main', questSubtype: 'Spring Boot' },
@@ -50,7 +51,7 @@ export class SpringBootComponent implements OnInit {
     this.topics[index].completed = !this.topics[index].completed;
 
     const userId = localStorage.getItem('selectedUserId') || '7';
-    const updateUrl = `http://localhost:8080/api/user-progress/update`;
+    const updateUrl = `${environment.apiBaseUrl}/api/user-progress/update`;
 
     this.http.post(updateUrl, {
       userId: userId,

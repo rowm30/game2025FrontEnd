@@ -4,15 +4,50 @@
     Select a main quest to begin your learning adventure. Complete all stages to finish the quest!
   </p>
 
+  <!-- Hardcoded Buttons with Dynamic Progress -->
   <div class="quest-buttons">
-    <div class="quest-button-container" *ngFor="let quest of mainQuests">
-      <button (click)="selectQuest(quest)" class="quest-button">
-        {{ quest.name }}
+    <!-- Java -->
+    <div class="quest-button-container">
+      <button (click)="selectQuest('/main-quest/java')" class="quest-button">
+        Java
       </button>
       <div class="progress-bar">
-        <div class="progress" [style.width.%]="quest.progress"></div>
+        <div class="progress" [style.width.%]="progressMap['Java'] || 0"></div>
       </div>
-      <p class="progress-text">{{ quest.progress }}% Completed</p>
+      <p class="progress-text">{{ progressMap['Java'] || 0 }}% Completed</p>
+    </div>
+
+    <!-- DSA -->
+    <div class="quest-button-container">
+      <button (click)="selectQuest('/main-quest/dsa')" class="quest-button">
+        DSA
+      </button>
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="progressMap['DSA'] || 0"></div>
+      </div>
+      <p class="progress-text">{{ progressMap['DSA'] || 0 }}% Completed</p>
+    </div>
+
+    <!-- Spring Boot -->
+    <div class="quest-button-container">
+      <button (click)="selectQuest('/main-quest/spring-boot')" class="quest-button">
+        Spring Boot
+      </button>
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="progressMap['Spring Boot'] || 0"></div>
+      </div>
+      <p class="progress-text">{{ progressMap['Spring Boot'] || 0 }}% Completed</p>
+    </div>
+
+    <!-- SQL -->
+    <div class="quest-button-container">
+      <button (click)="selectQuest('/main-quest/sql')" class="quest-button">
+        SQL
+      </button>
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="progressMap['SQL'] || 0"></div>
+      </div>
+      <p class="progress-text">{{ progressMap['SQL'] || 0 }}% Completed</p>
     </div>
   </div>
 

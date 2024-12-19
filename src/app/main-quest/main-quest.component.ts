@@ -1,26 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgForOf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
-interface QuestProgress {
-  name: string;
-  progress: number;
-  route: string;
-}
+import {environment} from "../enviroment";
 
 @Component({
   selector: 'app-main-quest',
   templateUrl: './main-quest.component.html',
   standalone: true,
-  imports: [
-    NgForOf,
-    HttpClientModule // Add HttpClientModule here
-  ],
-  styleUrls: ['./main-quest.component.scss']
+  imports: [HttpClientModule],
+  styleUrls: ['./main-quest.component.scss'],
 })
 export class MainQuestComponent implements OnInit {
-  mainQuests: QuestProgress[] = [];
+  progressMap: { [key: string]: number } = {}; // Map to store progress dynamically
 
   constructor(private router: Router, private http: HttpClient) {}
 
@@ -30,19 +21,23 @@ export class MainQuestComponent implements OnInit {
 
   loadProgress(): void {
     const userId = localStorage.getItem('selectedUserId') || '7';
-    const apiUrl = `http://localhost:8080/api/main-quests`;
+    const apiUrl = `${environment.apiBaseUrl}/api/main-quests`;
 
-    this.http.get<QuestProgress[]>(apiUrl, { params: { userId: userId } }).subscribe({
+
+    this.http.get<any[]>(apiUrl, { params: { userId: userId } }).subscribe({
       next: (data) => {
-        this.mainQuests = data;
+        // Map quest names to their progress values
+        data.forEach((quest) => {
+          this.progressMap[quest.name] = quest.progress;
+        });
       },
-      error: (error) => console.error('Error fetching main quests progress:', error)
+      error: (error) => console.error('Error fetching main quests progress:', error),
     });
   }
 
-  selectQuest(quest: QuestProgress): void {
-    console.log(`Selected Quest: ${quest.name}`);
-    this.router.navigate([quest.route]);
+  selectQuest(route: string): void {
+    console.log(`Navigating to route: ${route}`);
+    this.router.navigate([route]);
   }
 
   goBack(): void {
